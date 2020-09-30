@@ -1,2 +1,37 @@
-# Big Mountain Resort - Recommendations
+# Big Mountain Resort - Recommendations based off Pricing Model
+
+Big Mountain Resort, as you know, is one of Montana's amazing and beautiful ski resorts, offering spectacular views of Glacier National Park and Flathead National Park. Every year, this great resort hosts approximately 350,000 skiiers and snowboarders with 105 trails, 11 lifts, 2 T-bars, and 1 magic carpet. The longest run is named Hellfire and is 3.3 miles in length. The base elevation is 4,464 ft, and the summit is 6,817 ft with a vertical drop of 2,353 ft. Big Mountain Resort has recently installed an additional chair lift to help increase the distribution of visitors across the mountain. This additional chair increases their operating costs by $1,540,000 this season.
+
+Big Mountain Resort's pricing strategy is and has been to charge a premium above the average price of resorts in its market segment. However, as you all have suspected, this is not the best method to maximize Big Mountain Resort's returns, relative to Big Mountain's position in the market. We want to have a strong sense of what facilities matter most to visitors, to be able to see which facilities visitors are most likely to pay more for. So that's exactly what we attempted to create - a pricing model that would allow us to get a strong sense of what facilities matter most to visitors to be able to make more knowledgable future investments, and change Big Mountain Resort's pricing strategy based off this pricing model. 
+
+With this additional chair and the huge increase in operation costs, it is vital that we figure out a better pricing model to cover the costs, and make sure that future business decisions about facilities are made with an understanding of how each facility will affect ticket pricing. To do this, we split up our tasks into four steps: Data Wrangling, Exploratory Data Analysis, Pre-Processing and Training Data, and Modeling. 
+
+In this first step, we worked on wrangling the data that was given to us. We loaded the data and explored it, and looked to see which columns had the most missing data. We made sure each entry was a unique entry, and explored the relationships of resorts between region and states, and the distribution of ticket prices by state. We plotted histograms of each of the data's numeric features, to have a graphic veiw and see which features may have a possible cause for concern, to decipher if that data is accurately protrayed and/or if we should be using this data in our pricing model. Doing this allowed us to pick out those features that looked concerning, and spot check the data. After looking for patterns between states, we threw away records with missing price data. We realized that population data would be useful, and obtained it from wikipedia. We also realized that we need to focus on the adult weekend prices, as this had much more data than adult weekday prices. 
+
+In the second step, we dove deeper into exploratory data analysis. Using a heatmap, we were able to see that AdultWeekend ticket price had a high correlation with fastQuads, Runs, and Snow making, letting us know that visitors place a lot of value in facilities and how gauranteed snow, over other features such as terrain area. 
+
+[![Screen-Shot-2020-09-29-at-12-51-10-PM.png](https://i.postimg.cc/N06TMrRF/Screen-Shot-2020-09-29-at-12-51-10-PM.png)](https://postimg.cc/Z9q0sn7z)
+
+We then created scatterplots of ticket prices against desired columns.
+
+[![Screen-Shot-2020-09-29-at-12-53-31-PM.png](https://i.postimg.cc/mrmL8LsV/Screen-Shot-2020-09-29-at-12-53-31-PM.png)](https://postimg.cc/3yDQwHWD)
+
+Several note worthy patterns include the positive correlation between vertical drop, fast quads, runs, total chairs and price. We also explored the ratio of chairs to the number of runs and area of skiable terrain against price to see how the number of facilities has an effect on price. 
+
+[![Screen-Shot-2020-09-29-at-12-52-11-PM.png](https://i.postimg.cc/SQvXmGHV/Screen-Shot-2020-09-29-at-12-52-11-PM.png)](https://postimg.cc/s15fc5jZ)
+
+In this step, we noted that we should be wary of data and whether it is exclusive vs. mass market resort effect. We also realized that we need to keep in mind that a high price might not always equate to high profit, because the price per visitor may be high but number of visitors may be low. 
+
+In the third step, we started to build machine learning models. We first build a model using the mean value as a predictor, and split the data into training and testing partitions to allow us to have an independent assessment of how the model may perform in the future. We dropped off non-numerical columns, and calculated the mean and fit the mean strategy. We calculated the Mean Absolute Error, which let us know that we should expect an error of around $19 if we guessed ticket price based on the average known values. We also calculated Mean Squared Error (root mean square error). We input missing values in the data with median of each category in both train and test splits, and then used the median as the predictor. Using this new model, we got a much better Mean Absolute value of approximately $9, so we concluded that using the median as a predictor is much more accurate than using the mean as a predictor. We first built a best linear model. We then created a Random Forest Model. The random forest model had a lower cross validation mean absolute error than the linear regression model, an error of 9.64 versus the best linear model's cross validation mean absolute error of 10.50, so the best course of action is to use the random forest model. We can use this model to conclude that the dominant top 4 features in the data given are fastQuads, Runs, Snow Making_ac, and vertical_drop.
+
+[![Screen-Shot-2020-09-29-at-5-18-59-PM.png](https://i.postimg.cc/nzBQrJ1G/Screen-Shot-2020-09-29-at-5-18-59-PM.png)](https://postimg.cc/1nRz7b28)
+
+Lastly, in this third step, we also checked whether our data set size was big enough, or whether we should get a bigger sample size. Based on our data quantity assessment, shown below, we decided we have enough data to move forwar with the pricing model.
+
+[![Screen-Shot-2020-09-29-at-5-29-36-PM.png](https://i.postimg.cc/fR8Pq4mC/Screen-Shot-2020-09-29-at-5-29-36-PM.png)](https://postimg.cc/nXQTMPd9)
+
+In the fourth and final step, we took our model to gain insight into what Big Mountain's ideal ticket price could/should be, and how that might change under various scenarios. As mentioned before, Big Mountain Resort's pricing strategy was to charge a price above the average price of resorts in its market segment, $81.00. Using our pricing model, we calculated the expected BMR ticket price from our model to be $95.87. Even with the expected mean absolute error of $10.39, this suggest that there is a room for increase. The additional cost of the new chair lift is expected to be $1,540,000 this season, so we must raise ticket prices to account for this new, additional cost. Knowing this cost, and that the expected visitor count for the season is 350,000, and each visitor is expected ski an average of five days, we know we need to raise the price by at least $.88 to cover the new cost. To raise the price, we explored four scenarios for future improvements. Out of the four, it looks like the second scenario, increasing the vertical drop by adding a run to a point 150 feet lower down but requiring the installation of an additional chair lift to bring skiers back up, without additional snow making coverage, is the best course of action. This scenario is expected to increase support for the ticket price by $1.99, and over the season, this could be expected to amount to $3,474,638.
+
+
+
 
